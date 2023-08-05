@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>sign-in</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <!-- <ion-title>Bariatrico App</ion-title> -->
+      <ion-img src="../../../assets/img/Control Baríatrico.png"></ion-img>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-input label="Email" labelPlacement="stacked" placeholder="hi@ionic.io"
+          [(ngModel)]="email">{{ email }}</ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Contraseña" labelPlacement="stacked" placeholder="********"
+          [(ngModel)]="password"> {{ password }}</ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="block" (click)="login()">Iniciar Sesión</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item>
+    <ion-label>Si aun no estas registrado, haz click abajo</ion-label>
+  </ion-item>
+  <ion-button expand="block" (click)="goToRegister()">Registrarse</ion-button>
+</ion-content>

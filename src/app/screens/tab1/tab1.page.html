@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Preguntas Frecuentes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card color="primary" (click)="toggleCard(faq)" *ngFor="let faq of faqs">
+    <ion-card-header>
+      <ion-card-title>{{ faq.question }}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content *ngIf="isCardExpanded">
+      {{ faq.answer }}
+    </ion-card-content>
+  </ion-card>
+</ion-content>
