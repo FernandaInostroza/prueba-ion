@@ -31,13 +31,13 @@
 
   <ion-button expand="block" (click)="calcularIMC()">Calcular</ion-button>
 
-  <ion-card *ngIf="imc">
+  <ion-card *ngIf="imcCalculate">
     <ion-card-header>
       Resultado
     </ion-card-header>
     <ion-card-content>
-      <p>Su IMC es: {{ imc.toFixed(2) }}</p>
-      <p>lo que indica {{ getResultado() }}</p>
+      <p>Su IMC es: {{ imcCalculate.toFixed(2) }}</p>
+      <p>Usted esta con {{ getResultado() }}</p>
     </ion-card-content>
   </ion-card>
 </ion-content>

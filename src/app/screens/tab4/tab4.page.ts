@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Paciente } from 'src/app/shared/models/paciente.models';
 
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
   styleUrls: ['./tab4.page.scss'],
 })
-export class Tab4Page implements OnInit {
-  name: string | undefined;
-  email: string | undefined;
+export class Tab4Page {
+  paciente!: Paciente;
   
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

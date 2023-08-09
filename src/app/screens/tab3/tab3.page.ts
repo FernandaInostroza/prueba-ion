@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IMC } from 'src/app/shared/models/imc.models'
 
 @Component({
   selector: 'app-tab3',
@@ -6,28 +7,33 @@ import { Component } from '@angular/core';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-  peso: number = NaN;
-  altura: number = NaN;
-  imc: number = NaN;
+  registroImc: IMC = {
+    imc: 0,
+  };
+  peso: number = 0;
+  altura: number = 0;
+  imcCalculate: number = 0;
 
   constructor() {}
-
+//calcula el valor del imc
   calcularIMC() {
     if (this.peso && this.altura) {
       const alturaMetros = this.altura / 100;
-      this.imc = this.peso / (alturaMetros * alturaMetros);
+      this.imcCalculate = this.peso / (alturaMetros * alturaMetros);
+      this.registroImc.imc = this.imcCalculate;
     } else {
-      this.imc = NaN;
+      this.imcCalculate = NaN;
     }
   }
 
+//le da una interpretacion al valor obtenido
   getResultado() {
-    if (this.imc) {
-      if (this.imc < 18.5) {
+    if (this.imcCalculate) {
+      if (this.imcCalculate < 18.5) {
         return 'Bajo peso';
-      } else if (this.imc >= 18.5 && this.imc < 24.9) {
+      } else if (this.imcCalculate >= 18.5 && this.imcCalculate < 24.9) {
         return 'Peso normal';
-      } else if (this.imc >= 25 && this.imc < 29.9) {
+      } else if (this.imcCalculate >= 25 && this.imcCalculate < 29.9) {
         return 'Sobrepeso';
       } else {
         return 'Obesidad';
@@ -36,5 +42,4 @@ export class Tab3Page {
       return '';
     }
   }
-
 }

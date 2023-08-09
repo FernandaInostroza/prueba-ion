@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FAQ } from 'src/app/models/faqs.models';
-import { UserService } from 'src/app/services/user.service';
+import { FAQ } from 'src/app/shared/models/faqs.models';
+import { FaqsService } from 'src/app/shared/services/faqs.service';
 
 @Component({
   selector: 'app-tab1',
@@ -9,17 +9,17 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class Tab1Page {
   faqs: FAQ[] = [];
-  isCardExpanded: boolean = false;
 
-  constructor(private consulta: UserService) {
+  constructor(private consulta: FaqsService) {
     this.consulta.getAllFaqs().then((response) => {
-      this.faqs = <FAQ[]>response;
+      this.faqs = response!.faqs;
 
-      console.log(response);
+      this.faqs = this.faqs.map((item) => ({...item, isCardExpanded: false}));
     });
   }
 
-  toggleCard(faq: FAQ) {
-    this.isCardExpanded = !this.isCardExpanded;
+  toggleCard(index: number) {
+    this.faqs = this.faqs.map((item) => ({...item, isCardExpanded: false}));
+    this.faqs[index].isCardExpanded = true;
   }
 }

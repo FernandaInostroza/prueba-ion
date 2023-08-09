@@ -7,12 +7,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card color="primary" (click)="toggleCard(faq)" *ngFor="let faq of faqs">
+  <ion-card color="primary" (click)="toggleCard(i)" *ngFor="let faq of faqs; let i = index">
     <ion-card-header>
       <ion-card-title>{{ faq.question }}</ion-card-title>
     </ion-card-header>
   
-    <ion-card-content *ngIf="isCardExpanded">
+    <ion-card-content *ngIf="faq.isCardExpanded">
       {{ faq.answer }}
     </ion-card-content>
   </ion-card>

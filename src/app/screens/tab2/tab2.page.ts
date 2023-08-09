@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Expediente } from 'src/app/models/expediente.models';
-import { UserService } from 'src/app/services/user.service';
+import { Expediente } from 'src/app/shared/models/expediente.models';
+import { ExpedienteService } from 'src/app/shared/services/expediente.service';
 
 @Component({
   selector: 'app-tab2',
@@ -10,13 +10,10 @@ import { UserService } from 'src/app/services/user.service';
 export class Tab2Page {
   expedientes: Expediente [] = [];
 
-  constructor(private exp: UserService) {
+  constructor(private exp: ExpedienteService) {
     this.exp.getExpedienteMed().then((response) => {
-      this.expedientes = <Expediente[]>response;
-
-      console.log(response);
+      this.expedientes = response!.expedientes;
     })
-
   }
 
 }
