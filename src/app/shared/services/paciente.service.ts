@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Paciente } from '../models/expediente.models';
+import { Paciente } from '../models/paciente.models';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +11,15 @@ export class PacienteService {
   constructor(private http: HttpClient) { }
 
   //registro paciente
-  createPac(data: Paciente){
+  createPac(pacienteData: Paciente){
     const url = `${environment.api}/pacientes`;
-    return this.http.post(url, data).toPromise();
+    return this.http.post<Paciente>(url, pacienteData).toPromise();
   }
   
   //Inicio sesion Paciente
-  loginPac(data: Paciente){
+  loginPac(email: string, password: string){
     const url = `${environment.api}/pacientes/login`;
-    return this.http.post(url, data).toPromise();
+    return this.http.post(url, [email, password]).toPromise();
   }
 
   //Paciente GET

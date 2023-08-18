@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ImcService } from 'src/app/shared/services/imc.service';
 import { IMC } from 'src/app/shared/models/imc.models'
 
 @Component({
@@ -7,20 +8,16 @@ import { IMC } from 'src/app/shared/models/imc.models'
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-  registroImc: IMC = {
-    imc: 0,
-  };
   peso: number = 0;
   altura: number = 0;
   imcCalculate: number = 0;
 
-  constructor() {}
+  constructor(private servicio: ImcService) {}
 //calcula el valor del imc
   calcularIMC() {
     if (this.peso && this.altura) {
       const alturaMetros = this.altura / 100;
       this.imcCalculate = this.peso / (alturaMetros * alturaMetros);
-      this.registroImc.imc = this.imcCalculate;
     } else {
       this.imcCalculate = NaN;
     }
@@ -41,5 +38,11 @@ export class Tab3Page {
     } else {
       return '';
     }
+  }
+
+  postResult() {
+    this.servicio.createIMC(this.imcCalculate).then((response) => {
+      alert('IMC registrado exitosamente');
+    })
   }
 }

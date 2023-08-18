@@ -24,15 +24,7 @@ export class SignInPage {
   constructor(private router: Router, private authService: AuthenticationService) { }
 
   login() {
-/*     // Llama al servicio de autenticación para intentar el inicio de sesión.
-    const exitoLogin = this.authService.login(this.email, this.password);
-    if (exitoLogin) {
-      // Redirige al usuario a la página de inicio después del inicio de sesión exitoso.
-      this.router.navigate(['/tabs/tabs2']);
-    } else {
-      // Mostrar mensaje de error o notificación en la interfaz si el inicio de sesión falla.
-      console.log('Credenciales incorrectas. Por favor, verifica tu email y contraseña.');
-    } */
+    
   }
 
   goToRegister() {
