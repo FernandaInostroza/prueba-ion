@@ -3,6 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { ApiResponseExpedientes, Expediente } from '../models/expediente.models';
 import { environment } from 'src/environments/environment';
 
+interface ExpedientePostResponse{
+  ok: boolean;
+  expediente: Expediente;
+  error?: any;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -21,10 +26,10 @@ export class ExpedienteService {
     return this.http.get<ApiResponseExpedientes>(url).toPromise();
   }
 
-  //POST
+  //POST create
   postExpediente(data: Expediente){
     const url = `${environment.api}/expedientes`;
-    return this.http.post(url, data).toPromise();
+    return this.http.post<ExpedientePostResponse>(url, data).toPromise();
   }
 
 }

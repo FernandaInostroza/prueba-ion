@@ -11,26 +11,38 @@ export class Tab3Page {
   peso: number = 0;
   altura: number = 0;
   imcCalculate: number = 0;
+    
+  pesos: number[] = [];
+  alturas: number[] = [];
 
-  constructor(private servicio: ImcService) {}
-//calcula el valor del imc
+  constructor(private servicio: ImcService) {
+    for (let i = 40; i <= 200; i++) {
+      this.pesos.push(i);
+    }
+  
+    for (let altura = 140; altura <= 250; altura++) {
+      const alturaDecimal = altura / 100;
+      this.alturas.push(alturaDecimal);
+    }
+  }
+
   calcularIMC() {
     if (this.peso && this.altura) {
-      const alturaMetros = this.altura / 100;
+      const alturaMetros = this.altura;
       this.imcCalculate = this.peso / (alturaMetros * alturaMetros);
     } else {
       this.imcCalculate = NaN;
     }
   }
-
-//le da una interpretacion al valor obtenido
+  
+  // Da una interpretación al valor obtenido
   getResultado() {
     if (this.imcCalculate) {
       if (this.imcCalculate < 18.5) {
         return 'Bajo peso';
-      } else if (this.imcCalculate >= 18.5 && this.imcCalculate < 24.9) {
+      } else if (this.imcCalculate >= 18.5 && this.imcCalculate < 25) {
         return 'Peso normal';
-      } else if (this.imcCalculate >= 25 && this.imcCalculate < 29.9) {
+      } else if (this.imcCalculate >= 25 && this.imcCalculate < 30) {
         return 'Sobrepeso';
       } else {
         return 'Obesidad';

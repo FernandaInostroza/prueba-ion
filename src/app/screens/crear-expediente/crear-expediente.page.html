@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Crear Expediente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Para agregar un expediente seleccione al paciente e ingrese la descripcion </ion-card-title>   
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+            <ion-select label="" placeholder="Paciente">
+              <ng-container *ngFor="let paciente of pacientes"> 
+              <ion-select-option value="paciente">{{ paciente.rut }} - {{ paciente.name }}  </ion-select-option>
+            </ng-container>
+            </ion-select>
+        </ion-item>
+      </ion-list>
+      
+      <ion-textarea placeholder="Ingrese descripción expediente aquí">
+      </ion-textarea>
+      <ion-button expand="block" (click)="guardarExp()"> Guardar Expediente </ion-button> <!-- Agregar accion del boton -->
+    </ion-card-content>
+  </ion-card>
+</ion-content>

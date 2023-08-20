@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StorageService } from './shared/services/storage.service'
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private storage: StorageService) {
+    //this.storage.save('user', {rut: '12345678-9', type: 'PACIENTE'})
+    //this.storage.save('user', {rut: '12345678-9', type: 'MEDICO'})
+  }
 }

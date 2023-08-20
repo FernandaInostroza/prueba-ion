@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Preguntas Frecuentes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-accordion-group expand="inset" *ngFor="let faq of faqs">
+    <ion-accordion>
+      <ion-item slot="header" color="primary">
+        <ion-label>{{ faq.question }}</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">{{ faq.answer }}</div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- <ion-card color="primary" (click)="toggleCard(i)" *ngFor="let faq of faqs; let i = index">
+    <ion-card-header>
+      <ion-card-title>{{ faq.question }}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content *ngIf="faq.isCardExpanded">
+      {{ faq.answer }}
+    </ion-card-content>
+  </ion-card> -->
+</ion-content>

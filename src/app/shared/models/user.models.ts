@@ -3,7 +3,7 @@ export interface User {
     type: UserType;
 }
 
-enum UserType {
+export enum UserType {
     'PACIENTE' = 'PACIENTE',
     'MEDICO' = 'MEDICO',
 }
