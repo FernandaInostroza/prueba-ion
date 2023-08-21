@@ -11,8 +11,10 @@ user:any;
 //define modelo
 
   constructor(private storage: StorageService) {
+  }
+
+  ionViewWillEnter(){
     this.user = this.storage.load('user', null);
-    console.log(this.user);
   }
 
 }

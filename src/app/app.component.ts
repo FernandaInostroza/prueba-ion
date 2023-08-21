@@ -9,6 +9,6 @@ import { StorageService } from './shared/services/storage.service'
 export class AppComponent {
   constructor(private storage: StorageService) {
     //this.storage.save('user', {rut: '12345678-9', type: 'PACIENTE'})
-    //this.storage.save('user', {rut: '12345678-9', type: 'MEDICO'})
+    //this.storage.save('user', {rut: '98765432-1', type: 'MEDICO'})
   }
 }

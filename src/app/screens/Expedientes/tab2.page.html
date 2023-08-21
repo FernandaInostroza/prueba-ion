@@ -9,37 +9,58 @@
 <ion-content [fullscreen]="true">
   <ion-card color="shade">
     <ion-card-header>
-    <ion-card-subtitle>
-    En esta sección podras visualizar tus expedientes, para esto solicita a tu medico que cree uno, puedes
-    visualizar el historial de IMC de la calculadora, para esto calcula tu IMC.
-  </ion-card-subtitle> 
-</ion-card-header>
-  </ion-card>
-
-  <ion-card color="primary">
-    <ion-card-title class="ion-text-center"> Resultados IMC</ion-card-title>
-<!-- Agregar tabla de IMC -->
-<ion-grid class="ion-text-center" >
-  <ion-row>
-    <ion-col>Primer IMC</ion-col>
-    <ion-col>Ultimo IMC</ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col> 33.91 </ion-col> <!--Agregar los IMC-->
-    <ion-col> 27.68 </ion-col>
-  </ion-row>
-</ion-grid>
-  </ion-card>
-
-  <ion-card color="primary" *ngFor="let expediente of expedientes">
-    <ion-card-header>
-      <ion-card-title>{{ expediente.medico.especiality }}</ion-card-title>
-      <ion-card-subtitle>{{ expediente.medico.name }}</ion-card-subtitle>
+      <ion-card-subtitle>
+        En esta sección podras visualizar tus expedientes, para esto solicita a tu medico que cree uno, puedes
+        visualizar el historial de IMC de la calculadora, para esto calcula tu IMC.
+      </ion-card-subtitle>
     </ion-card-header>
-  
-    <ion-card-content>
-        <ion-card-content aria-label="infomacion" placeholder="Ingrese Información Aquí">{{ expediente.description }}</ion-card-content>
-    </ion-card-content>
   </ion-card>
+
+  <ion-card *ngIf="user?.type === 'PACIENTE'" color="primary">
+    <!--MOSTRAR X RUT-->
+    <ion-card-title class="ion-text-center"> Resultados IMC</ion-card-title>
+    <ion-grid class="ion-text-center">
+      <ion-row>
+        <ion-col>Primer IMC</ion-col>
+        <ion-col>Ultimo IMC</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col> {{(imcHistorial | imcFilter: 'first')?.imc }} </ion-col> <!--Agregar los IMC-->
+        <ion-col> {{(imcHistorial | imcFilter: 'last')?.imc }} </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <ng-container *ngIf="user?.type === 'PACIENTE'">
+    <ng-container><!--MOSTRAR X RUT-->
+      <ion-card color="primary" *ngFor="let expediente of expedientes">
+        <ion-card-header>
+          <ion-card-title>{{ expediente.medico.especiality }}</ion-card-title>
+          <ion-card-subtitle>{{ expediente.medico.name }}</ion-card-subtitle>
+          <ion-card-subtitle>{{ expediente.medico.phone }}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-card-content aria-label="infomacion">{{ expediente.description }}</ion-card-content>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </ng-container>
+
+
+  <ng-container *ngIf="user?.type === 'MEDICO'">
+    <!--MOSTRAR X RUT-->
+    <ion-card color="primary" *ngFor="let expediente of expedientes">
+      <ion-card-header>
+        <ion-card-title>{{ expediente.paciente.name }}</ion-card-title>
+        <ion-card-subtitle>{{ expediente.paciente.rut}}</ion-card-subtitle>
+        <ion-card-subtitle>{{ expediente.paciente.phone }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-card-content aria-label="infomacion">{{ expediente.description }}</ion-card-content>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
 
 </ion-content>

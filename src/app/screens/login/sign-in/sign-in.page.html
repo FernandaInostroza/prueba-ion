@@ -12,17 +12,19 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <ion-input label="Email" labelPlacement="stacked" placeholder="hi@ionic.io"
-          [(ngModel)]="paciente.email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input label="Contraseña" labelPlacement="stacked" placeholder="********"
-          [(ngModel)]="paciente.password"></ion-input>
-        </ion-item>
-      </ion-list>
-      <ion-button expand="block" (click)="login()">Iniciar Sesión</ion-button>
+      <form [formGroup]="userForm">
+        <ion-list>
+          <ion-item>
+            <ion-input label="Email" labelPlacement="stacked" placeholder="hi@ionic.io"
+              formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Contraseña" labelPlacement="stacked" placeholder="********"
+              formControlName="password"></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-button expand="block" (click)="login()" [disabled]="!userForm.valid">Iniciar Sesión</ion-button>
+      </form>
     </ion-card-content>
   </ion-card>
 

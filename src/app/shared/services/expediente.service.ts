@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiResponseExpedientes, Expediente } from '../models/expediente.models';
 import { environment } from 'src/environments/environment';
+import { StorageService } from './storage.service';
 
-interface ExpedientePostResponse{
+interface ExpedientePostResponse {
   ok: boolean;
   expediente: Expediente;
   error?: any;
@@ -12,22 +13,22 @@ interface ExpedientePostResponse{
   providedIn: 'root'
 })
 export class ExpedienteService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private _storage: StorageService) { }
 
-//EXPEDIENTES
+  //EXPEDIENTES
   //GET
-  getExpedienteMed(){ 
-    const url = `${environment.api}/expedientes/medico?rut=98765432-1`;
+  getExpedienteMed(rut: string) {
+    const url = `${environment.api}/expedientes/medico?rut=${rut}`;
     return this.http.get<ApiResponseExpedientes>(url).toPromise();
   }
 
-  getExpedientePac(rut: string){
+  getExpedientePac(rut: string) {
     const url = `${environment.api}/expedientes/paciente?rut=${rut}`;
     return this.http.get<ApiResponseExpedientes>(url).toPromise();
   }
 
   //POST create
-  postExpediente(data: Expediente){
+  postExpediente(data: Expediente) {
     const url = `${environment.api}/expedientes`;
     return this.http.post<ExpedientePostResponse>(url, data).toPromise();
   }

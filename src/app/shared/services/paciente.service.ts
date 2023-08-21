@@ -20,12 +20,6 @@ export class PacienteService {
     const url = `${environment.api}/pacientes`;
     return this.http.post<PacientePostResponse>(url, pacienteData).toPromise();
   }
-  
-  //Inicio sesion Paciente
-  loginPac(email: string, password: string){
-    const url = `${environment.api}/pacientes/login`;
-    return this.http.post(url, [email, password]).toPromise();
-  }
 
   //Paciente GET
   getUserPac(rut: string){

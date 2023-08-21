@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Medico } from '../models/expediente.models';
+import { ApiResponseMedico } from '../models/medico.models';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +10,10 @@ import { Medico } from '../models/expediente.models';
 export class MedicoService {
   
   constructor(private http: HttpClient) { }
-
-//MEDICO
-  //Inicio Sesion Medico
-  loginMed(data: Medico){
-    const url = `${environment.api}/medicos/login`;
-    return this.http.post(url, data).toPromise();
-  }
   
   //Medico GET
   getUserMed(rut: string){
-    const url = `${environment.api}/medicos/one?rut==${rut}`;
-    return this.http.get(url).toPromise();    
+    const url = `${environment.api}/medicos/one?rut=${rut}`;
+    return this.http.get<ApiResponseMedico>(url).toPromise();    
   }
 }

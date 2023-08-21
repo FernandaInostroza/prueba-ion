@@ -1,32 +1,20 @@
+import { HttpClient, HttpResponseBase } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user.models';
 
+interface AuthPostResponse extends HttpResponseBase {
+  auth: User;
+}
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   private usuarioAutenticado: boolean = false;
-  
-  constructor() { }
 
-  login(email: string, password: string): boolean {
-    // Aquí debes implementar la lógica real de autenticación.
-    // Puedes comunicarte con un backend o API para verificar las credenciales del usuario.
+  constructor(private http: HttpClient) { }
 
-    // Ejemplo de autenticación simulada:
-    if (email === 'usuario@example.com' && password === 'contrasena123') {
-      this.usuarioAutenticado = true;
-      return true;
-    }
-
-    return false;
-  }
-
-  estaAutenticado(): boolean {
-    return this.usuarioAutenticado;
-  }
-
-  logout(): void {
-    this.usuarioAutenticado = false;
+  login(email: string, password: string) {
+    return (this.http.post<AuthPostResponse>(`${environment.api}/auth`, { email, password })).toPromise();
   }
 }

@@ -8,35 +8,28 @@
 
 <ion-content [fullscreen]="true">
   <ion-card>
-      <ion-card-header>
-        <ion-card-title>Calculadora Indice de masa corporal</ion-card-title>
-        <ion-card-subtitle>Para calcular el índice de masa corporal seleccione a continuación con su peso en kilogramos 
-          y altura.</ion-card-subtitle>
-      </ion-card-header>
-    
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-select label="Peso en kg" 
-            labelPlacement="stacked" 
-            placeholder="60" 
-            [(ngModel)]="peso">
+    <ion-card-header>
+      <ion-card-title>Calculadora Indice de masa corporal</ion-card-title>
+      <ion-card-subtitle>Para calcular el índice de masa corporal seleccione a continuación con su peso en kilogramos
+        y altura.</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-select label="Peso en kg" labelPlacement="stacked" [(ngModel)]="peso">
             <ion-select-option *ngFor="let peso of pesos" [value]="peso">{{ peso }}</ion-select-option>
           </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-select
-            label="Altura" 
-            labelPlacement="stacked" 
-            placeholder="1.72" 
-            [(ngModel)]="altura">
+        </ion-item>
+        <ion-item>
+          <ion-select label="Altura" labelPlacement="stacked" [(ngModel)]="altura">
             <ion-select-option *ngFor="let altura of alturas" [value]="altura">{{ altura }}</ion-select-option>
           </ion-select>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
-  
+
 
   <ion-button expand="block" (click)="calcularIMC()">Calcular</ion-button>
 
