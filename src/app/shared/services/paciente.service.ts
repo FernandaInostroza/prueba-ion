@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ApiResponsePaciente, Paciente } from '../models/paciente.models';
+import { ApiResponsePaciente, Paciente, ResponseGetPaciente } from '../models/paciente.models';
 
 interface PacientePostResponse{
   ok: boolean;
@@ -24,7 +24,7 @@ export class PacienteService {
   //Paciente GET
   getUserPac(rut: string){
     const url = `${environment.api}/pacientes/one?rut=${rut}`;
-    return this.http.get<ApiResponsePaciente>(url).toPromise();
+    return this.http.get<ResponseGetPaciente>(url).toPromise();
   }
 
   getAllPac(){

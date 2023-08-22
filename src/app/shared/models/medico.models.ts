@@ -1,6 +1,6 @@
 export interface ApiResponseMedico {
     ok:      boolean;
-    medicos: Medico[];
+    medico: Medico;
 }
 
 export interface Medico {

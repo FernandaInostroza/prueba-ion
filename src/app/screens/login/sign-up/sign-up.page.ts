@@ -24,6 +24,8 @@ export class SignUpPage {
     height: new FormControl(0 , [Validators.required]),
   });
 
+  showPassword = false;
+
   password: string = '';
   passwordVisible: boolean = false;
 
@@ -65,6 +67,10 @@ export class SignUpPage {
       //mensaje de alerta
       alert("Error en el registro");
     }
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
  
   goToLogin() {

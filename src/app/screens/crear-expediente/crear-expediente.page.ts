@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { CreateExpediente } from 'src/app/shared/models/expediente.models';
 import { Paciente } from 'src/app/shared/models/paciente.models';
+import { User } from 'src/app/shared/models/user.models';
 import { ExpedienteService } from 'src/app/shared/services/expediente.service';
 import { PacienteService } from 'src/app/shared/services/paciente.service';
+import { StorageService } from 'src/app/shared/services/storage.service';
 
 @Component({
   selector: 'app-crear-expediente',
@@ -10,12 +13,10 @@ import { PacienteService } from 'src/app/shared/services/paciente.service';
 })
 export class CrearExpedientePage{
   pacientes: Paciente [] = [];
-  rut = '12345678-9';
+  rut = '';
+  descripcion = '';
 
-  constructor(private pac: PacienteService, private exp: ExpedienteService) {
-  /*   this.pac.getUserPac(this.rut).then((response) => { //arrelgar el this.rut, traer el rut del cache
-      this.pacientes = response!.pacientes;
-  }) */
+  constructor(private pac: PacienteService, private exp: ExpedienteService, private _storage:StorageService) {
     this.pac.getAllPac().then((response) => {
       this.pacientes = response!.pacientes;
     });
@@ -23,15 +24,24 @@ export class CrearExpedientePage{
 
 
   guardarExp(){
-   /*  this.exp.postExpediente(data).then((response) => { //Falta pasarle la data a expediente
-      const {ok} = response!;
-      if (ok) {
-        alert("Expediente creado")
+    const user = <User | null>this._storage.load('user' , null);
+    const expediente: CreateExpediente = {
+      description: this.descripcion,
+      pacienteRut: this.rut,
+      medicoRut: user!.rut,
+    };
+    this.exp.postExpediente(expediente).then((response) => {
+      if(response?.ok){
+        alert('se creo correctamente');
+        this.descripcion = '';
+        this.rut = '';
+
       }else {
-        //mensaje de alerta
-        alert("Error en el registro");
+        alert('error al crear expediente');
       }
-    }); */
+    }).catch(() => {
+      alert('error al crear expediente');
+    });
   } 
 
 }

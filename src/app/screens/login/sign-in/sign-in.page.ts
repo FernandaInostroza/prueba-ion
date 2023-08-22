@@ -14,6 +14,7 @@ export class SignInPage {
     email: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', [Validators.minLength(8), Validators.maxLength(24), Validators.required]),
   });
+  showPassword = false;
 
   constructor(private router: Router, private _storage: StorageService, private _auth: AuthenticationService) { }
 
@@ -28,6 +29,10 @@ export class SignInPage {
       alert('Hubo un error en el login');
     });
   };
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
 
   goToRegister() {
     this.router.navigate(['/login/sign-up']);

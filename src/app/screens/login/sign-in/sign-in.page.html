@@ -19,8 +19,9 @@
               formControlName="email"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input label="Contraseña" labelPlacement="stacked" placeholder="********"
-              formControlName="password"></ion-input>
+            <ion-label position="stacked">Contraseña</ion-label>
+            <ion-input [type]="showPassword ? 'text' : 'password'" placeholder="********" formControlName="password"></ion-input>
+            <ion-icon slot="end" [name]="showPassword ? 'eye-off' : 'eye'" (click)="togglePasswordVisibility()"></ion-icon>
           </ion-item>
         </ion-list>
         <ion-button expand="block" (click)="login()" [disabled]="!userForm.valid">Iniciar Sesión</ion-button>
@@ -28,8 +29,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-item>
-    <ion-label>Si aún no estás registrado, haz clic abajo.</ion-label>
+  <ion-item button (click)="goToRegister()">
+    <ion-label>Si aún no estás registrado, haz click aquí.</ion-label>
   </ion-item>
-  <ion-button expand="block" (click)="goToRegister()">Registrarse</ion-button>
 </ion-content>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ApiResponseExpedientes, Expediente } from '../models/expediente.models';
+import { ApiResponseExpedientes, CreateExpediente, Expediente } from '../models/expediente.models';
 import { environment } from 'src/environments/environment';
 import { StorageService } from './storage.service';
 
@@ -28,9 +28,9 @@ export class ExpedienteService {
   }
 
   //POST create
-  postExpediente(data: Expediente) {
+  postExpediente(expediente: CreateExpediente) {
     const url = `${environment.api}/expedientes`;
-    return this.http.post<ExpedientePostResponse>(url, data).toPromise();
+    return this.http.post<ExpedientePostResponse>(url, expediente).toPromise();
   }
 
 }

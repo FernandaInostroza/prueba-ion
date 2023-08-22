@@ -13,17 +13,17 @@
     <ion-card-content>
       <ion-list>
         <ion-item>
-            <ion-select label="" placeholder="Paciente">
+            <ion-select label="" placeholder="Paciente" [(ngModel)]="rut">
               <ng-container *ngFor="let paciente of pacientes"> 
-              <ion-select-option value="paciente">{{ paciente.rut }} - {{ paciente.name }}  </ion-select-option>
+              <ion-select-option [value]="paciente.rut">{{ paciente.rut }} - {{ paciente.name }}  </ion-select-option>
             </ng-container>
             </ion-select>
         </ion-item>
       </ion-list>
       
-      <ion-textarea placeholder="Ingrese descripción expediente aquí">
+      <ion-textarea placeholder="Ingrese descripción expediente aquí" [(ngModel)]="descripcion">
       </ion-textarea>
-      <ion-button expand="block" (click)="guardarExp()"> Guardar Expediente </ion-button> <!-- Agregar accion del boton -->
+      <ion-button expand="block" (click)="guardarExp()" [disabled]="!rut"> Guardar Expediente </ion-button> <!-- Agregar accion del boton -->
     </ion-card-content>
   </ion-card>
 </ion-content>

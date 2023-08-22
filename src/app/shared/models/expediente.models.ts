@@ -31,3 +31,9 @@ export interface Paciente {
     weight: number;
     height: number;
 }
+
+export interface CreateExpediente {
+    description: string;
+    pacienteRut: string;
+    medicoRut: string;
+}

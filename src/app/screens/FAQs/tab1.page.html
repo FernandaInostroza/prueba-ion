@@ -11,13 +11,13 @@
   <ion-accordion-group expand="inset" *ngFor="let faq of faqs">
     <ion-accordion>
       <ion-item slot="header" color="primary">
-        <ion-label>{{ faq.question }}</ion-label>
+        <ion-card-subtitle class="faq-question">{{ faq.question }}</ion-card-subtitle>
       </ion-item>
       <div class="ion-padding" slot="content">{{ faq.answer }}</div>
     </ion-accordion>
   </ion-accordion-group>
 
-  <!-- <ion-card color="primary" (click)="toggleCard(i)" *ngFor="let faq of faqs; let i = index">
+<!--   <ion-card color="primary" (click)="toggleCard(i)" *ngFor="let faq of faqs; let i = index">
     <ion-card-header>
       <ion-card-title>{{ faq.question }}</ion-card-title>
     </ion-card-header>

@@ -16,7 +16,7 @@
     </ion-card-header>
   </ion-card>
 
-  <ion-card *ngIf="user?.type === 'PACIENTE'" color="primary">
+  <ion-card *ngIf="user?.type === 'PACIENTE'" color="warning">
     <!--MOSTRAR X RUT-->
     <ion-card-title class="ion-text-center"> Resultados IMC</ion-card-title>
     <ion-grid class="ion-text-center">
@@ -25,42 +25,40 @@
         <ion-col>Ultimo IMC</ion-col>
       </ion-row>
       <ion-row>
-        <ion-col> {{(imcHistorial | imcFilter: 'first')?.imc }} </ion-col> <!--Agregar los IMC-->
-        <ion-col> {{(imcHistorial | imcFilter: 'last')?.imc }} </ion-col>
+        <ion-col> {{(imcHistorial | imcFilter: 'first')?.imc || 'No tiene'}} </ion-col> <!--Agregar los IMC-->
+        <ion-col> {{(imcHistorial | imcFilter: 'last')?.imc || 'No tiene' }} </ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
 
   <ng-container *ngIf="user?.type === 'PACIENTE'">
-    <ng-container><!--MOSTRAR X RUT-->
-      <ion-card color="primary" *ngFor="let expediente of expedientes">
-        <ion-card-header>
-          <ion-card-title>{{ expediente.medico.especiality }}</ion-card-title>
-          <ion-card-subtitle>{{ expediente.medico.name }}</ion-card-subtitle>
-          <ion-card-subtitle>{{ expediente.medico.phone }}</ion-card-subtitle>
-        </ion-card-header>
-
-        <ion-card-content>
-          <ion-card-content aria-label="infomacion">{{ expediente.description }}</ion-card-content>
-        </ion-card-content>
-      </ion-card>
-    </ng-container>
+  <ion-accordion-group expand="inset" *ngFor="let expediente of expedientes">
+    <ion-accordion>
+      <ion-item slot="header" color="primary">
+        <ion-label>{{ expediente.medico.especiality }}</ion-label>
+        <ion-label>{{ expediente.medico.name }}</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">Fecha: {{ expediente.createdAt | date: 'dd/MM/yyyy'}}</div>
+      <div class="ion-padding" slot="content">Teléfono: {{ expediente.medico.phone }}</div>
+      <div class="ion-padding" slot="content">{{ expediente.description }}</div>
+    </ion-accordion>
+  </ion-accordion-group>
   </ng-container>
-
 
   <ng-container *ngIf="user?.type === 'MEDICO'">
-    <!--MOSTRAR X RUT-->
-    <ion-card color="primary" *ngFor="let expediente of expedientes">
-      <ion-card-header>
-        <ion-card-title>{{ expediente.paciente.name }}</ion-card-title>
-        <ion-card-subtitle>{{ expediente.paciente.rut}}</ion-card-subtitle>
-        <ion-card-subtitle>{{ expediente.paciente.phone }}</ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content>
-        <ion-card-content aria-label="infomacion">{{ expediente.description }}</ion-card-content>
-      </ion-card-content>
-    </ion-card>
-  </ng-container>
+    <ion-accordion-group expand="inset" *ngFor="let expediente of expedientes">
+      <ion-accordion>
+        <ion-item slot="header" color="primary">
+          <ion-label>{{ expediente.paciente.rut }}</ion-label>
+          <ion-label>{{ expediente.paciente.name }}</ion-label>
+          <ion-label></ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">Fecha: {{ expediente.createdAt | date: 'dd/MM/yyyy'}}</div>
+        <div class="ion-padding" slot="content">Teléfono {{ expediente.paciente.phone }}</div>
+          <div class="ion-padding" slot="content">{{ expediente.description }}</div>
+          
+      </ion-accordion>
+    </ion-accordion-group>
+    </ng-container>
 
 </ion-content>
